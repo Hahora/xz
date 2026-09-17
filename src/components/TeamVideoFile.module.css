@@ -1,0 +1,236 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 32px;
+}
+
+.fields {
+  margin: 0 0 20px;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: minmax(0, 120px) minmax(0, 1fr);
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.field:last-child {
+  border-bottom: 0;
+}
+
+.fieldLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.fieldValue {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.action {
+  display: flex;
+}
+
+/* ---- Unavailable ---- */
+.unavailable {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.unavailableHead {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--warning);
+}
+
+.unavailableNote {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin-bottom: 12px;
+}
+
+.skip {
+  display: flex;
+}
+
+.skipButton {
+  padding: 6px 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  transition: color var(--dur-fast) var(--ease-ui);
+}
+
+.skipButton:hover {
+  color: var(--text);
+}
+
+/* ---- Dialog ---- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(8, 11, 10, 0.88);
+  backdrop-filter: blur(3px);
+  animation: fadeIn var(--dur-ui) var(--ease-ui);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop {
+    animation: none;
+  }
+}
+
+.dialog {
+  width: 100%;
+  max-width: 1120px;
+  background: var(--surface-1);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.dialogHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-1);
+}
+
+.dialogTitle {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  transition:
+    color var(--dur-fast) var(--ease-ui),
+    border-color var(--dur-fast) var(--ease-ui);
+}
+
+.closeButton:hover {
+  color: var(--text);
+  border-color: var(--brand-bright);
+}
+
+.closeButton svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.videoWrap {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: calc(100vh - 160px);
+}
+
+/* Формат по метаданным видео, без искусственного crop. */
+.video {
+  width: 100%;
+  max-height: calc(100vh - 160px);
+  object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .backdrop {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .dialog {
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .dialogHead {
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  .videoWrap {
+    flex: 1;
+    max-height: none;
+  }
+
+  .video {
+    max-height: none;
+  }
+
+  .closeLabel {
+    display: none;
+  }
+
+  .closeButton {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .field {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .fieldValue {
+    font-size: 15px;
+  }
+
+  .action {
+    width: 100%;
+  }
+}

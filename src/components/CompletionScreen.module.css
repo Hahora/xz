@@ -1,0 +1,155 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: clamp(24px, 4vw, 48px) 0 24px;
+  animation: screenIn var(--dur-reveal) var(--ease-ui);
+}
+
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen {
+    animation: none;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.hero {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(16px, 3vw, 36px);
+  flex-wrap: wrap;
+}
+
+.bigNumber {
+  font-size: clamp(96px, 22vw, 240px);
+  font-weight: 600;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  color: var(--brand-bright);
+}
+
+.series {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1.6vw, 17px);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.rows {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.rowLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.rowValue {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-align: right;
+}
+
+.greeting {
+  font-size: clamp(22px, 3.4vw, 40px);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  padding: clamp(8px, 2vw, 20px) 0;
+}
+
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.madeBy {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  color: var(--line-strong);
+  text-transform: uppercase;
+}
+
+.footerRight {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+@media (max-width: 767px) {
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+
+  .rowValue {
+    text-align: left;
+    font-size: 15px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .footerRight {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .footerLeft {
+    justify-content: space-between;
+  }
+}

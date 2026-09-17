@@ -1,0 +1,142 @@
+.boot {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  min-height: 72vh;
+  padding-bottom: 6vh;
+}
+
+.terminal {
+  width: 100%;
+  max-width: 560px;
+}
+
+.lines {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.85;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  animation: bootLine var(--dur-reveal) var(--ease-ui);
+}
+
+.spacer {
+  height: 0.6em;
+  line-height: 0.6em;
+}
+
+.lineOk {
+  color: var(--text);
+}
+
+.lineAlert {
+  color: var(--brand-bright);
+}
+
+@keyframes bootLine {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    animation: none;
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  margin-top: 4px;
+  background: var(--brand-bright);
+  animation: caret 1s steps(1, end) infinite;
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
+
+.auth {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  animation: bootLine var(--dur-reveal) var(--ease-ui);
+}
+
+.microcopy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--line-strong);
+}
+
+.skip {
+  margin-top: 24px;
+  padding: 6px 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  transition: color var(--dur-fast) var(--ease-ui);
+}
+
+.skip:hover {
+  color: var(--text);
+}
+
+.cornerNote {
+  position: absolute;
+  right: 0;
+  bottom: 6vh;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--line);
+}
+
+@media (max-width: 767px) {
+  .boot {
+    min-height: 66vh;
+    align-items: center;
+  }
+
+  .auth {
+    width: 100%;
+  }
+
+  .cornerNote {
+    display: none;
+  }
+}

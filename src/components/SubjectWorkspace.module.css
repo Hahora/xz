@@ -1,0 +1,458 @@
+.workspace {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 40px;
+  align-items: start;
+  padding: 8px 0 40px;
+}
+
+/* ---- Scanner ---- */
+.scanner {
+  margin: 0;
+  position: relative;
+}
+
+.frame {
+  position: relative;
+  border: 1px solid var(--line-strong);
+  padding: 10px;
+  background: var(--bg-1);
+  /* Двойная рамка — только у главного объекта. */
+  box-shadow: 0 0 0 1px var(--line) inset;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--surface-1);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-ui) var(--ease-ui);
+}
+
+.frame:hover .photo {
+  transform: scale(1.015);
+}
+
+.tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(160deg, rgba(0, 113, 70, 0.14), rgba(8, 11, 10, 0.34));
+  mix-blend-mode: multiply;
+}
+
+.media::after {
+  /* Слабые горизонтальные развёртки прибора. */
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(8, 11, 10, 0.16) 0 1px,
+    transparent 1px 3px
+  );
+  opacity: 0.5;
+}
+
+/* Corners */
+.corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--brand-bright);
+  border-style: solid;
+  border-width: 0;
+  z-index: 3;
+}
+
+.cornerTL {
+  top: 3px;
+  left: 3px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.cornerTR {
+  top: 3px;
+  right: 3px;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.cornerBL {
+  bottom: 3px;
+  left: 3px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.cornerBR {
+  bottom: 3px;
+  right: 3px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* Crosshair смещён вниз, чтобы не перекрывать лицо. */
+.crosshair {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.55;
+  background:
+    linear-gradient(var(--brand-bright), var(--brand-bright)) center / 1px 100% no-repeat,
+    linear-gradient(var(--brand-bright), var(--brand-bright)) center / 100% 1px no-repeat;
+}
+
+.crosshair::after {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border: 1px solid var(--brand-bright);
+  border-radius: 50%;
+}
+
+/* Analysis points */
+.point {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.pointDot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border: 1px solid var(--brand-bright);
+  border-radius: 50%;
+  background: rgba(32, 169, 104, 0.3);
+}
+
+.pointLine {
+  position: absolute;
+  left: 3px;
+  top: 0;
+  width: 14px;
+  height: 1px;
+  background: rgba(32, 169, 104, 0.5);
+}
+
+.pointLabel {
+  position: absolute;
+  left: 20px;
+  top: -7px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(237, 242, 238, 0.65);
+}
+
+/* Scan line: 1.8s, максимум два прохода. */
+.scanLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 4;
+  background: linear-gradient(to right, transparent, var(--brand-bright), transparent);
+  box-shadow: 0 0 12px rgba(32, 169, 104, 0.7);
+  animation: scanDown var(--dur-scan) linear 2;
+}
+
+@keyframes scanDown {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  8%,
+  92% {
+    opacity: 1;
+  }
+  to {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanLine {
+    display: none;
+  }
+
+  .frame:hover .photo {
+    transform: none;
+  }
+}
+
+.vScale {
+  position: absolute;
+  right: 6px;
+  top: 12%;
+  bottom: 12%;
+  width: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 3;
+  opacity: 0.5;
+}
+
+.vScale span {
+  height: 1px;
+  background: var(--text-muted);
+  width: 5px;
+  align-self: flex-end;
+}
+
+.vScale span:nth-child(5n + 1) {
+  width: 10px;
+  background: var(--brand-bright);
+}
+
+/* Offline fallback — та же рамка и размеры. */
+.offline {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: var(--surface-1);
+}
+
+.offlineGlyph {
+  width: 96px;
+  height: 120px;
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2;
+}
+
+.offlineText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0 12px;
+}
+
+.offlineText span:first-child {
+  color: var(--warning);
+}
+
+/* Служебные метки */
+.tag {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  background: var(--bg-1);
+  padding: 2px 5px;
+  z-index: 5;
+}
+
+.tagTL {
+  top: -7px;
+  left: 14px;
+}
+
+.tagTR {
+  top: -7px;
+  right: 14px;
+}
+
+.tagBL {
+  bottom: -7px;
+  left: 14px;
+}
+
+.tagBR {
+  bottom: -7px;
+  right: 14px;
+  color: var(--brand-bright);
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.captionCoords {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--line-strong);
+}
+
+/* ---- Passport ---- */
+.passport {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+.passportHead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-size: clamp(38px, 5.2vw, 72px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  color: var(--ok);
+}
+
+.fieldsPanel {
+  padding: 4px 20px;
+}
+
+.fields {
+  margin: 0;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.field:last-child {
+  border-bottom: 0;
+}
+
+.fieldLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.fieldValue {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.fieldPending {
+  color: var(--warning);
+}
+
+.fieldMuted {
+  color: var(--text-muted);
+}
+
+.passportAction {
+  display: flex;
+}
+
+/* ---- Tablet ---- */
+@media (max-width: 1023px) {
+  .workspace {
+    grid-template-columns: 45fr 55fr;
+    gap: 28px;
+  }
+
+  .field {
+    grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .pointLabel,
+  .captionCoords {
+    display: none;
+  }
+}
+
+/* ---- Mobile: отдельная вертикальная композиция ---- */
+@media (max-width: 767px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-bottom: 24px;
+  }
+
+  .media {
+    max-height: 62vh;
+  }
+
+  .frame {
+    padding: 8px;
+  }
+
+  /* Оставляем только 2 служебные подписи. */
+  .tagBL,
+  .tagTR {
+    display: none;
+  }
+
+  .point:nth-child(n + 4) {
+    display: none;
+  }
+
+  .title {
+    font-size: clamp(34px, 12vw, 52px);
+  }
+
+  /* Паспорт — список label → value, а не широкая таблица. */
+  .field {
+    grid-template-columns: 1fr;
+    gap: 3px;
+    padding: 10px 0;
+  }
+
+  .fieldLabel {
+    font-size: 10px;
+  }
+
+  .fieldValue {
+    font-size: 15px;
+  }
+
+  .fieldsPanel {
+    padding: 4px 16px;
+  }
+
+  .passportAction {
+    width: 100%;
+  }
+}

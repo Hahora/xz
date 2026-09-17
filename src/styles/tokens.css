@@ -1,0 +1,66 @@
+:root {
+  /* Surface */
+  --bg-0: #080b0a;
+  --bg-1: #0d1210;
+  --surface-1: #111814;
+  --surface-2: #151e19;
+  --line: #26322b;
+  --line-strong: #3a4b41;
+
+  /* Text */
+  --text: #edf2ee;
+  --text-muted: #8d9a92;
+
+  /* Brand + status */
+  --brand: #007146;
+  --brand-bright: #20a968;
+  --ok: #58c886;
+  --warning: #e6a23c;
+  --danger: #e05252;
+
+  /* Motion */
+  --dur-fast: 140ms;
+  --dur-ui: 220ms;
+  --dur-reveal: 420ms;
+  --dur-scan: 1800ms;
+  --ease-ui: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Type */
+  --font-ui: 'IBM Plex Sans Condensed', 'Roboto Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+
+  /* Layout */
+  --shell-max: 1440px;
+  --gutter: 48px;
+  --radius: 3px;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+/* Пользователь просит меньше движения — гасим всё декоративное. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-ui: 1ms;
+    --dur-reveal: 100ms;
+    --dur-scan: 1ms;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted: #b6c2ba;
+    --line: #3d4c44;
+    --line-strong: #5c7167;
+  }
+}

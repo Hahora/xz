@@ -1,0 +1,232 @@
+.panels {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 32px;
+}
+
+.list,
+.checkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Metric row ---- */
+.row {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0.45;
+  transition: opacity var(--dur-ui) var(--ease-ui);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.rowDone {
+  opacity: 1;
+}
+
+.rowMain {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rowLabels {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rowLabelRu {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.rowLabelEn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.rowRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+
+.rowValue {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  min-width: 52px;
+  text-align: right;
+}
+
+.rowValueHidden {
+  color: var(--line-strong);
+}
+
+.rowNote {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 68ch;
+  animation: noteIn var(--dur-reveal) var(--ease-ui);
+}
+
+@keyframes noteIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rowNote {
+    animation: none;
+  }
+}
+
+/* ---- Gauge ---- */
+.gauge {
+  position: relative;
+  height: 3px;
+  margin-top: 10px;
+  background: var(--bg-1);
+  overflow: hidden;
+}
+
+.gaugeFill {
+  display: block;
+  height: 100%;
+  /* Линейное заполнение без fake bounce. */
+  transition: width 620ms linear;
+}
+
+.gauge_ok {
+  background: var(--ok);
+}
+
+.gauge_warning {
+  background: var(--warning);
+}
+
+.gauge_active {
+  background: var(--brand-bright);
+}
+
+.gauge_danger {
+  background: var(--danger);
+}
+
+.gauge_neutral,
+.gauge_classified {
+  background: var(--line-strong);
+}
+
+/* ---- Advisory ---- */
+.advisory {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--warning);
+  border-radius: var(--radius);
+  background: var(--bg-1);
+  animation: noteIn var(--dur-reveal) var(--ease-ui);
+}
+
+.advisoryLabel {
+  margin: 6px 0 4px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--warning);
+}
+
+/* ---- Component checklist ---- */
+.checkRow {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0.45;
+  transition: opacity var(--dur-ui) var(--ease-ui);
+}
+
+.checkRow:last-child {
+  border-bottom: 0;
+}
+
+.checkMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* ---- Passed ---- */
+.passed {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-strong);
+  animation: noteIn var(--dur-reveal) var(--ease-ui);
+}
+
+.passedHead {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--ok);
+}
+
+.passedSub {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.action {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  /* Метрика: label и статус сверху, значение и описание ниже. */
+  .rowMain {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rowRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .rowValue {
+    text-align: left;
+    font-size: 17px;
+  }
+
+  .checkMain {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .rowNote {
+    font-size: 15px;
+  }
+
+  .action {
+    width: 100%;
+  }
+}

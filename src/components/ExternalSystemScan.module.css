@@ -1,0 +1,266 @@
+.detect {
+  margin: 0 0 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.detectHead {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--warning);
+  margin-bottom: 12px;
+}
+
+.detectRow {
+  display: grid;
+  grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
+  gap: 16px;
+  padding: 5px 0;
+}
+
+.detectLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.detectValue {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.running {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.checkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  opacity: 0.45;
+  transition: opacity var(--dur-ui) var(--ease-ui);
+}
+
+.checkRowDone {
+  opacity: 1;
+}
+
+.checkLabel {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.checkDots {
+  flex: 1;
+  height: 1px;
+  min-width: 12px;
+  background-image: linear-gradient(to right, var(--line-strong) 25%, transparent 25%);
+  background-size: 4px 1px;
+}
+
+/* ---- Critical error ---- */
+.errorWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-bottom: 32px;
+  /* Один короткий глитч на входе, дальше интерфейс стабилен. */
+  animation: glitchIn 220ms steps(2, end) 1;
+}
+
+@keyframes glitchIn {
+  0% {
+    transform: translateX(0);
+    filter: none;
+  }
+  25% {
+    transform: translateX(-4px);
+    filter: hue-rotate(-18deg);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-2px);
+    filter: hue-rotate(10deg);
+  }
+  100% {
+    transform: translateX(0);
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .errorWrap {
+    animation: none;
+  }
+}
+
+.errorHead {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(224, 82, 82, 0.45);
+  border-radius: var(--radius);
+  background: rgba(224, 82, 82, 0.06);
+}
+
+.errorBar {
+  width: 3px;
+  flex: none;
+  background: var(--danger);
+}
+
+.errorHeadline {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--danger);
+}
+
+.errorSub {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.diagFields {
+  margin: 0 0 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.diagRow {
+  display: grid;
+  grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
+  gap: 16px;
+  padding: 7px 0;
+}
+
+.diagLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.diagValue {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.diagDanger {
+  color: var(--danger);
+}
+
+.diagOk {
+  color: var(--ok);
+}
+
+.findings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.finding {
+  display: flex;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  animation: findingIn var(--dur-reveal) var(--ease-ui);
+}
+
+.finding:last-child {
+  border-bottom: 0;
+}
+
+@keyframes findingIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .finding {
+    animation: none;
+  }
+}
+
+.findingNum {
+  flex: none;
+  font-size: 11px;
+  color: var(--danger);
+  padding-top: 2px;
+}
+
+.findingText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  max-width: 68ch;
+}
+
+.recommendation {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-1);
+  animation: findingIn var(--dur-reveal) var(--ease-ui);
+}
+
+.recommendationText {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.action {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .detectRow,
+  .diagRow {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .checkLabel {
+    font-size: 11px;
+  }
+
+  .findingText,
+  .recommendationText {
+    font-size: 15px;
+  }
+
+  .action {
+    width: 100%;
+  }
+}
