@@ -340,18 +340,35 @@ export const diagnosis: Diagnosis = {
   action: 'СФОРМИРОВАТЬ ЗАКЛЮЧЕНИЕ',
 };
 
-export const report = {
+export interface ReportRow {
+  label: string;
+  value: string;
+  /** 'danger' подсветит строку красным — на случай, если статус изменится. */
+  tone: 'ok' | 'danger';
+}
+
+export const report: {
+  title: string;
+  order: string;
+  status: string;
+  rows: ReportRow[];
+  stamp: string;
+  engineerNoteLabel: string;
+  greeting: string[];
+  punchlineAction: string;
+  punchline: string[];
+} = {
   title: 'SERVICE REPORT №35',
   order: 'ORDER: SRV-35-1991',
   status: 'DIAGNOSTIC STATUS: COMPLETE',
   rows: [
-    { label: 'АНДРЕЙ', value: 'ИСПРАВЕН', tone: 'ok' as const },
-    { label: 'ДВИГАТЕЛЬ', value: 'ИСПРАВЕН', tone: 'ok' as const },
-    { label: 'БИЗНЕС', value: 'ИСПРАВЕН', tone: 'ok' as const },
-    { label: 'ELECTROLITE', value: 'ИСПРАВЕН', tone: 'ok' as const },
-    { label: 'ЗАПАС МОЩНОСТИ', value: 'ОГРОМНЫЙ', tone: 'ok' as const },
-    { label: 'СИСТЕМА ПРАЗДНОВАНИЯ', value: 'ГОТОВА', tone: 'ok' as const },
-    { label: 'ELECTROLITE.RU', value: 'ТРЕБУЕТ СЕРВИСА', tone: 'danger' as const },
+    { label: 'АНДРЕЙ', value: 'ИСПРАВЕН', tone: 'ok' },
+    { label: 'ДВИГАТЕЛЬ', value: 'ИСПРАВЕН', tone: 'ok' },
+    { label: 'БИЗНЕС', value: 'ИСПРАВЕН', tone: 'ok' },
+    { label: 'ELECTROLITE', value: 'ИСПРАВЕН', tone: 'ok' },
+    { label: 'ЗАПАС МОЩНОСТИ', value: 'ОГРОМНЫЙ', tone: 'ok' },
+    { label: 'СИСТЕМА ПРАЗДНОВАНИЯ', value: 'ГОТОВА', tone: 'ok' },
+    { label: 'ELECTROLITE.RU', value: 'ИСПРАВЕН', tone: 'ok' },
   ],
   stamp: 'PASSED',
   engineerNoteLabel: 'КОММЕНТАРИЙ ИНЖЕНЕРА',
