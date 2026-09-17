@@ -14,7 +14,7 @@ import { DiagnosticShell, StageRail, SystemHeader } from './components/Diagnosti
 import { BootSequence } from './components/BootSequence';
 import { SubjectWorkspace } from './components/SubjectWorkspace';
 import { DiagnosticsPanel } from './components/DiagnosticsPanel';
-import { CriticalErrorPanel, ExternalSystemScan } from './components/ExternalSystemScan';
+import { ExternalDiagnosisPanel, ExternalSystemScan } from './components/ExternalSystemScan';
 import { ServiceReport } from './components/ServiceReport';
 import { TeamVideoFile } from './components/TeamVideoFile';
 import { CompletionScreen } from './components/CompletionScreen';
@@ -43,7 +43,6 @@ export default function App() {
 
   const [scanning, setScanning] = useState(false);
   const [showAdvisory, setShowAdvisory] = useState(false);
-  const [revealFault, setRevealFault] = useState(false);
   const [visibleFindings, setVisibleFindings] = useState(0);
   const [showRecommendation, setShowRecommendation] = useState(false);
   const [showGreeting, setShowGreeting] = useState(false);
@@ -167,7 +166,6 @@ export default function App() {
       // Только теперь — короткий глитч и переход в критическое состояние.
       window.setTimeout(
         () => {
-          setRevealFault(true);
           setStage('criticalError');
           runFindings();
         },
@@ -226,7 +224,6 @@ export default function App() {
     setHostStates(queued(externalScan.checks.length));
     setScanning(false);
     setShowAdvisory(false);
-    setRevealFault(false);
     setVisibleFindings(0);
     setShowRecommendation(false);
     setShowGreeting(false);
@@ -305,15 +302,14 @@ export default function App() {
                 <div className={styles.block}>
                   <ExternalSystemScan
                     checkStates={hostStates}
-                    revealFault={revealFault}
-                    errorActive={errorActive}
+                    allDone={hostStates.every((s) => s === 'done')}
                   />
                 </div>
               )}
 
               {errorActive && (
                 <div className={styles.block}>
-                  <CriticalErrorPanel
+                  <ExternalDiagnosisPanel
                     visibleFindings={visibleFindings}
                     showRecommendation={showRecommendation}
                     showAction={showRecommendation && !showReport}

@@ -8,7 +8,7 @@
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.1em;
-  color: var(--warning);
+  color: var(--brand-bright);
   margin-bottom: 12px;
 }
 
@@ -75,74 +75,12 @@
   background-size: 4px 1px;
 }
 
-/* ---- Critical error ---- */
+/* ---- External diagnosis ---- */
 .errorWrap {
   display: flex;
   flex-direction: column;
   gap: 18px;
   padding-bottom: 32px;
-  /* Один короткий глитч на входе, дальше интерфейс стабилен. */
-  animation: glitchIn 220ms steps(2, end) 1;
-}
-
-@keyframes glitchIn {
-  0% {
-    transform: translateX(0);
-    filter: none;
-  }
-  25% {
-    transform: translateX(-4px);
-    filter: hue-rotate(-18deg);
-  }
-  50% {
-    transform: translateX(3px);
-  }
-  75% {
-    transform: translateX(-2px);
-    filter: hue-rotate(10deg);
-  }
-  100% {
-    transform: translateX(0);
-    filter: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .errorWrap {
-    animation: none;
-  }
-}
-
-.errorHead {
-  display: flex;
-  align-items: stretch;
-  gap: 14px;
-  padding: 14px 16px;
-  border: 1px solid rgba(224, 82, 82, 0.45);
-  border-radius: var(--radius);
-  background: rgba(224, 82, 82, 0.06);
-}
-
-.errorBar {
-  width: 3px;
-  flex: none;
-  background: var(--danger);
-}
-
-.errorHeadline {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--danger);
-}
-
-.errorSub {
-  margin-top: 4px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
 }
 
 .diagFields {
@@ -169,10 +107,6 @@
   margin: 0;
   font-size: 13px;
   letter-spacing: 0.04em;
-}
-
-.diagDanger {
-  color: var(--danger);
 }
 
 .diagOk {
@@ -213,7 +147,7 @@
 .findingNum {
   flex: none;
   font-size: 11px;
-  color: var(--danger);
+  color: var(--ok);
   padding-top: 2px;
 }
 
@@ -263,4 +197,26 @@
   .action {
     width: 100%;
   }
+}
+
+/* ---- External check passed ---- */
+.passed {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.passedHead {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--ok);
+}
+
+.passedSub {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
 }

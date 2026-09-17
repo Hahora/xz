@@ -294,12 +294,12 @@ export const externalScan = {
     { id: 'business', label: 'BUSINESS CORE', result: 'OK' as const },
     { id: 'catalog', label: 'CATALOG CONNECTION', result: 'OK' as const },
     { id: 'network', label: 'SERVICE NETWORK', result: 'ONLINE' as const },
-    { id: 'protocol', label: 'INTERFACE PROTOCOL', result: 'FAULT' as const },
-    { id: 'ux', label: 'USER EXPERIENCE', result: 'FAULT' as const },
-    { id: 'visual', label: 'VISUAL SYSTEM', result: 'FAULT' as const },
+    { id: 'protocol', label: 'INTERFACE PROTOCOL', result: 'OK' as const },
+    { id: 'ux', label: 'USER EXPERIENCE', result: 'OK' as const },
+    { id: 'visual', label: 'VISUAL SYSTEM', result: 'OK' as const },
   ],
-  errorHeadline: 'CRITICAL SERVICE EVENT',
-  errorSub: 'EXTERNAL INTERFACE REQUIRES ATTENTION',
+  passedHeadline: 'EXTERNAL SYSTEM CHECK: PASSED',
+  passedSub: 'NO FAULTS DETECTED',
 } as const;
 
 export interface DiagnosisField {
@@ -319,22 +319,22 @@ interface Diagnosis {
 
 export const diagnosis: Diagnosis = {
   fields: [
-    { label: 'OBJECT', value: 'ELECTROLITE.RU', danger: true },
-    { label: 'STATUS', value: 'REQUIRES IMMEDIATE SERVICE', danger: true },
+    { label: 'OBJECT', value: 'ELECTROLITE.RU' },
+    { label: 'STATUS', value: 'FULLY OPERATIONAL' },
     { label: 'OWNER STATUS', value: 'FULLY OPERATIONAL' },
     { label: 'BUSINESS CORE', value: 'OPERATIONAL' },
-    { label: 'FAULT CLASS', value: 'UI / UX / VISUAL SYSTEM', danger: true },
+    { label: 'INTERFACE CLASS', value: 'UI / UX / VISUAL SYSTEM — OK' },
   ],
   findings: [
-    'Обнаружены следы визуального протокола прошлого поколения.',
-    'Плотность элементов превышает допустимую для спокойной эксплуатации.',
-    'Часть интерфейса работает дольше рекомендованного межсервисного интервала.',
-    'Пользовательский маршрут требует регулировки, очистки и новой сборки.',
+    'Визуальный протокол соответствует текущему поколению.',
+    'Плотность элементов в пределах нормы для спокойной эксплуатации.',
+    'Интерфейс работает в рекомендованном межсервисном интервале.',
+    'Пользовательский маршрут проходится без регулировки.',
     'Замена владельца не требуется.',
   ],
   recommendationTitle: 'RECOMMENDED ACTION',
   recommendation: [
-    'Капитальный ремонт интерфейса без остановки бизнеса.',
+    'Вмешательство не требуется. Система исправна.',
     'Основной агрегат не разбирать.',
   ],
   action: 'СФОРМИРОВАТЬ ЗАКЛЮЧЕНИЕ',
@@ -429,7 +429,7 @@ export const shell = {
     metricsScanning: 'DIAGNOSTICS',
     componentsScanning: 'COMPONENTS',
     externalScan: 'EXTERNAL SCAN',
-    criticalError: 'CRITICAL EVENT',
+    criticalError: 'EXTERNAL DIAGNOSIS',
     report: 'SERVICE REPORT',
     videoReady: 'TEAM FILE',
     complete: 'COMPLETE',
